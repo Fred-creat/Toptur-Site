@@ -182,8 +182,7 @@ console.log("TEMPLATE:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
 console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
 
   const [modalOpen, setModalOpen] = useState(false);
-
- function sendEmail(e) {
+function sendEmail(e) {
   e.preventDefault();
 
   const form = e.target;
@@ -193,40 +192,36 @@ console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
   const whatsapp = form.whatsapp.value;
   const mensagem = form.mensagem.value;
 
-  // Texto que será enviado pelo WhatsApp
-  const textoWhatsApp = 
+  const textoWhatsApp =
     `Olá! Novo contato recebido:\n\n` +
     `👤 Nome: ${nome}\n` +
     `📧 Email: ${email}\n` +
     `📱 WhatsApp: ${whatsapp}\n` +
     `💬 Mensagem:\n${mensagem}\n\n` +
-    `Enviado via site TopTur Bahia.`; 
+    `Enviado via site TopTur Bahia.`;
 
-  // Número que vai receber a mensagem (o seu)
   const numeroDestino = "5575998892484";
 
-  // Monta a URL do WhatsApp
   const urlWhats = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
 
-  // 1️⃣ Primeiro envia o email
-  emailjs
-    .sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      form,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
-    .then(() => {
+  emailjs.sendForm(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    form,
+    {
+      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      privateKey: import.meta.env.VITE_EMAILJS_PRIVATE_KEY
+    }
+  )
+  .then(() => {
       setModalOpen(true);
       form.reset();
-
-      // 2️⃣ Depois abre o WhatsApp automaticamente
       window.open(urlWhats, "_blank");
-    })
-    .catch((error) => {
+  })
+  .catch((error) => {
       console.error("Erro EmailJS:", error);
       alert("Erro ao enviar a mensagem. Tente novamente.");
-    });
+  });
 }
 
   return (
