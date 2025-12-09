@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const HeroSection = styled.section`
   width: 100%;
-  height: 50vh;
+  height: 75vh;
   background: url("/banner.jpg") center center / cover no-repeat;
   display: flex;
   align-items: center;
@@ -38,12 +38,14 @@ const Logo = styled.img`
 const Title = styled.h1`
   font-size: 38px;
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 `;
 
 const Subtitle = styled.p`
   font-size: 18px;
-  margin-bottom: 20px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+
   opacity: 0.9;
 `;
 

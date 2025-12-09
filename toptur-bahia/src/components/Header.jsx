@@ -30,6 +30,13 @@ const Logo = styled.h1`
   font-weight: 800;
   color: #0077b6; /* azul bonito profissional */
   margin: 0;
+
+  &:hover {
+    cursor: pointer;
+    color: #5d3260;
+    transform: translateY(-2px);
+    
+  }
 `;
 
 const Nav = styled.nav`

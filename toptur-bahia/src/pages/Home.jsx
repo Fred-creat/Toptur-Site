@@ -27,6 +27,7 @@ const Text = styled.p`
   font-size: 18px;
   margin-bottom: 30px;
   color: #555;
+  line-height: 25px;
 
 `;
 
@@ -61,7 +62,6 @@ export default function Home() {
 
       
       <Hero />
-      
        <Weather />
       <Container>
         <Title>Sobre a TopTur Bahia</Title>

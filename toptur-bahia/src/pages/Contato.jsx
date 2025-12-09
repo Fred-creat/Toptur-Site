@@ -1,6 +1,63 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import emailjs from "emailjs-com";
 import { useState } from "react";
+
+/* ANIMAÇÃO DO MODAL */
+const fadeIn = keyframes`
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: ${({ show }) => (show ? "flex" : "none")};
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`;
+
+const Modal = styled.div`
+  background: white;
+  padding: 30px 25px;
+  border-radius: 14px;
+  text-align: center;
+  max-width: 350px;
+  width: 90%;
+  animation: ${fadeIn} 0.3s ease-out;
+
+  h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #0077b6;
+  }
+
+  p {
+    color: #444;
+    margin-bottom: 15px;
+  }
+
+  button {
+    background: #0077b6;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+
+    &:hover {
+      background: #005f92;
+    }
+  }
+`;
+
+const CheckIcon = styled.div`
+  font-size: 50px;
+  color: #2ecc71;
+  margin-bottom: 10px;
+`;
 
 const Page = styled.div`
   max-width: 1100px;
@@ -38,6 +95,11 @@ const ContactCard = styled.div`
   border-radius: 12px;
   box-shadow: 0px 4px 18px rgba(0,0,0,0.08);
 
+  img {
+    width: 100px;
+    margin-bottom: 15px;
+  }
+
   h2 {
     font-size: 24px;
     margin-bottom: 15px;
@@ -54,19 +116,6 @@ const ContactCard = styled.div`
     font-weight: 600;
     text-decoration: none;
   }
-
-  img {
-
-    width: 100px;
-  }
-
-      .fi {
-      margin-left: 3px;
-      color: red;
-
-      }
-
-
 `;
 
 const Form = styled.form`
@@ -114,13 +163,6 @@ const Button = styled.button`
   }
 `;
 
-const StatusMessage = styled.p`
-  margin-top: 12px;
-  text-align: center;
-  color: #0077b6;
-  font-size: 16px;
-`;
-
 const MapBox = styled.div`
   margin-top: 40px;
   border-radius: 12px;
@@ -134,75 +176,92 @@ const MapBox = styled.div`
 `;
 
 export default function Contato() {
-  
-
-  const [status, setStatus] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
 
   function sendEmail(e) {
     e.preventDefault();
 
     emailjs
       .sendForm(
-        "service_mmxgtfc",  // seu SERVICE ID
-        "template_6gqi8fm", // seu TEMPLATE ID
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         e.target,
-        "sn7lbqOy87Y3tZlZl" // sua PUBLIC KEY
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
-        setStatus("Mensagem enviada com sucesso!");
+        setModalOpen(true);
         e.target.reset();
+
+        // Fecha automaticamente após 3 segundos
+        setTimeout(() => {
+          setModalOpen(false);
+        }, 3000);
       })
       .catch(() => {
-        setStatus("Erro ao enviar. Tente novamente.");
+        alert("Erro ao enviar. Tente novamente.");
       });
   }
 
   return (
-    <Page>
-      <Title>Contato</Title>
+    <>
+      {/* MODAL DE SUCESSO */}
+      <Overlay show={modalOpen} onClick={() => setModalOpen(false)}>
+        <Modal onClick={(e) => e.stopPropagation()}>
+          <CheckIcon>✔</CheckIcon>
+          <h3>Mensagem enviada!</h3>
+          <p>Obrigado por entrar em contato. Retornaremos em breve.</p>
+          <button onClick={() => setModalOpen(false)}>Fechar</button>
+        </Modal>
+      </Overlay>
 
-      <Subtitle>
-        Estamos prontos para ajudar você a planejar os melhores passeios em Morro de São Paulo.
-        Fale conosco pelo WhatsApp ou envie uma mensagem pelo formulário.
-      </Subtitle>
+      {/* CONTEÚDO PRINCIPAL */}
+      <Page>
+        <Title>Contato</Title>
 
-      <Flex>
+        <Subtitle>
+          Estamos prontos para ajudar você a planejar os melhores passeios em Morro de São Paulo.
+          Fale conosco pelo WhatsApp ou envie uma mensagem pelo formulário.
+        </Subtitle>
 
-        {/* Cartão com informações */}
-        <ContactCard>
-          <img src="toptur-logo.png" alt="logo-toptur" />
-          <h2>Informações de Contato</h2>
+        <Flex>
+          <ContactCard>
+            <img src="/toptur-logo.png" alt="logo-toptur" />
+            <h2>Informações de Contato</h2>
 
-          <p>📍 Morro de São Paulo – Bahia</p>
-          <p>📞 WhatsApp: <a href="https://wa.me/5575998892484" target="_blank">(75) 99889-2484</a></p>
-          <p>📧 Email: contato.topturbahia@gmail.com</p>
-          <a href="https://www.instagram.com/toptur.bahia/" title="instagram ícones"><i class="fi fi-brands-instagram"></i> Instagram</a>        
+            <p>📍 Morro de São Paulo – Bahia</p>
+            <p>
+              📞 WhatsApp:  
+              <a href="https://wa.me/5575998892484" target="_blank">
+                (75) 99889-2484
+              </a>
+            </p>
+            <p>📧 Email: contato.topturbahia@gmail.com</p>
 
-          
-        </ContactCard>
+            <p>
+              <a href="https://www.instagram.com/toptur.bahia/" target="_blank">
+                <i className="fi fi-brands-instagram"></i> Instagram
+              </a>
+            </p>
+          </ContactCard>
 
-        {/* Formulário */}
-        <Form onSubmit={sendEmail}>
-          <Input type="text" name="nome" placeholder="Seu nome" required />
-          <Input type="email" name="email" placeholder="Seu email" required />
-          <Input type="text" name="whatsapp" placeholder="WhatsApp" />
-          <TextArea name="mensagem" placeholder="Mensagem" required></TextArea>
+          <Form onSubmit={sendEmail}>
+            <Input type="text" name="nome" placeholder="Seu nome" required />
+            <Input type="email" name="email" placeholder="Seu email" required />
+            <Input type="text" name="whatsapp" placeholder="WhatsApp" />
+            <TextArea name="mensagem" placeholder="Mensagem" required></TextArea>
 
-          <Button type="submit">Enviar Mensagem</Button>
+            <Button type="submit">Enviar Mensagem</Button>
+          </Form>
+        </Flex>
 
-          {status && <StatusMessage>{status}</StatusMessage>}
-        </Form>
-
-      </Flex>
-
-      <MapBox>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.743094318635!2d-39.014107!3d-13.377139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x73888f699b2f75b%3A0xb9bba7d6853b9c57!2sMorro%20de%20S%C3%A3o%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
-          loading="lazy"
-          allowFullScreen
-        ></iframe>
-      </MapBox>
-
-    </Page>
+        <MapBox>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3897.743094318635!2d-39.014107!3d-13.377139!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x73888f699b2f75b%3A0xb9bba7d6853b9c57!2sMorro%20de%20São%20Paulo!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
+            loading="lazy"
+            allowFullScreen
+          ></iframe>
+        </MapBox>
+      </Page>
+    </>
   );
 }
