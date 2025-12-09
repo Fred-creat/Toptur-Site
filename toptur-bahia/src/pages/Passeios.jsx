@@ -86,7 +86,7 @@ export default function Passeios() {
     {
       nome: "Buggy",
       slug: "buggy",
-      img: "https://source.unsplash.com/600x400/?buggy,sand,dune",
+      img: "buggy.png",
       desc: "Aventura pelas trilhas e praias com emoção total."
     },
     {

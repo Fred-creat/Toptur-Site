@@ -80,9 +80,9 @@ export default function Buggy() {
       </Desc>
 
       <GalleryGrid>
-        <GalleryImg src="/piscinas-morere.png" alt="Piscinas naturais" />
+        <GalleryImg src="/buggy.png" alt="Piscinas naturais" />
         <GalleryImg src="/toptur-logo.png" alt="Logo TopTur" />
-        <GalleryImg src="/volta-ilha.png" alt="Piscinas" />
+        <GalleryImg src="/piscinas-garapua.png" alt="Piscinas" />
       </GalleryGrid>
 
       <VideoPlayer src="/videos/volta-ilha1.mp4" />
