@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
 /* ANIMAÇÃO DO MODAL */
@@ -178,29 +178,51 @@ const MapBox = styled.div`
 export default function Contato() {
   const [modalOpen, setModalOpen] = useState(false);
 
-  function sendEmail(e) {
-    e.preventDefault();
+ function sendEmail(e) {
+  e.preventDefault();
 
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        e.target,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
-      .then(() => {
-        setModalOpen(true);
-        e.target.reset();
+  const form = e.target;
 
-        // Fecha automaticamente após 3 segundos
-        setTimeout(() => {
-          setModalOpen(false);
-        }, 3000);
-      })
-      .catch(() => {
-        alert("Erro ao enviar. Tente novamente.");
-      });
-  }
+  const nome = form.nome.value;
+  const email = form.email.value;
+  const whatsapp = form.whatsapp.value;
+  const mensagem = form.mensagem.value;
+
+  // Texto que será enviado pelo WhatsApp
+  const textoWhatsApp = 
+    `Olá! Novo contato recebido:\n\n` +
+    `👤 Nome: ${nome}\n` +
+    `📧 Email: ${email}\n` +
+    `📱 WhatsApp: ${whatsapp}\n` +
+    `💬 Mensagem:\n${mensagem}\n\n` +
+    `Enviado via site TopTur Bahia.`; 
+
+  // Número que vai receber a mensagem (o seu)
+  const numeroDestino = "5575998892484";
+
+  // Monta a URL do WhatsApp
+  const urlWhats = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
+
+  // 1️⃣ Primeiro envia o email
+  emailjs
+    .sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
+      setModalOpen(true);
+      form.reset();
+
+      // 2️⃣ Depois abre o WhatsApp automaticamente
+      window.open(urlWhats, "_blank");
+    })
+    .catch((error) => {
+      console.error("Erro EmailJS:", error);
+      alert("Erro ao enviar a mensagem. Tente novamente.");
+    });
+}
 
   return (
     <>
@@ -230,7 +252,7 @@ export default function Contato() {
 
             <p>📍 Morro de São Paulo – Bahia</p>
             <p>
-              📞 WhatsApp:  
+              📞 WhatsApp:
               <a href="https://wa.me/5575998892484" target="_blank">
                 (75) 99889-2484
               </a>
@@ -248,7 +270,7 @@ export default function Contato() {
             <Input type="text" name="nome" placeholder="Seu nome" required />
             <Input type="email" name="email" placeholder="Seu email" required />
             <Input type="text" name="whatsapp" placeholder="WhatsApp" />
-            <TextArea name="mensagem" placeholder="Mensagem" required></TextArea>
+            <TextArea name="mensagem" placeholder="Mensagem" required />
 
             <Button type="submit">Enviar Mensagem</Button>
           </Form>
