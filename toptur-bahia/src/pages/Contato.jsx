@@ -178,9 +178,9 @@ const MapBox = styled.div`
 export default function Contato() {
 
   console.log("SERVICE:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
-console.log("TEMPLATE:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
-console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-console.log("KEY:", import.meta.env.VITE_EMAILJS_PRIVATE_KEY);
+  console.log("TEMPLATE:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
+  console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
 
   const [modalOpen, setModalOpen] = useState(false);
 function sendEmail(e) {
@@ -188,42 +188,23 @@ function sendEmail(e) {
 
   const form = e.target;
 
-  const nome = form.nome.value;
-  const email = form.email.value;
-  const whatsapp = form.whatsapp.value;
-  const mensagem = form.mensagem.value;
-
-  const textoWhatsApp =
-    `Olá! Novo contato recebido:\n\n` +
-    `👤 Nome: ${nome}\n` +
-    `📧 Email: ${email}\n` +
-    `📱 WhatsApp: ${whatsapp}\n` +
-    `💬 Mensagem:\n${mensagem}\n\n` +
-    `Enviado via site TopTur Bahia.`;
-
-  const numeroDestino = "5575998892484";
-
-  const urlWhats = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
-
-  emailjs.sendForm(
-    import.meta.env.VITE_EMAILJS_SERVICE_ID,
-    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-    form,
-    {
-      publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-      privateKey: import.meta.env.VITE_EMAILJS_PRIVATE_KEY
-    }
-  )
-  .then(() => {
+  emailjs
+    .sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
+    .then(() => {
       setModalOpen(true);
       form.reset();
-      window.open(urlWhats, "_blank");
-  })
-  .catch((error) => {
-      console.error("Erro EmailJS:", error);
-      alert("Erro ao enviar a mensagem. Tente novamente.");
-  });
+    })
+    .catch((error) => {
+      console.error("ERRO EMAILJS:", error);
+      alert("Erro ao enviar mensagem. Verifique sua configuração.");
+    });
 }
+
 
   return (
     <>
@@ -258,7 +239,7 @@ function sendEmail(e) {
                 (75) 99889-2484
               </a>
             </p>
-            <p>📧 Email: contato.topturbahia@gmail.com</p>
+            <p>📧 Email: topturbahiacontato@gmail.com</p>
 
             <p>
               <a href="https://www.instagram.com/toptur.bahia/" target="_blank">
