@@ -180,6 +180,7 @@ export default function Contato() {
   console.log("SERVICE:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
 console.log("TEMPLATE:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
 console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+console.log("KEY:", import.meta.env.VITE_EMAILJS_PRIVATE_KEY);
 
   const [modalOpen, setModalOpen] = useState(false);
 function sendEmail(e) {
