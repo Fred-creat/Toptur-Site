@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
-import emailjs from "@emailjs/browser"
-import { useState, useRef } from "react";
-
+import { useState } from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 /* ANIMAÇÃO DO MODAL */
 const fadeIn = keyframes`
@@ -177,63 +176,38 @@ const MapBox = styled.div`
 `;
 
 export default function Contato() {
-
-  console.log("SERVICE:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
-  console.log("TEMPLATE:", import.meta.env.VITE_EMAILJS_TEMPLATE_ID);
-  console.log("KEY:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-
-
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Referência do formulário
-  const form = useRef();
+  // FORM ID DO FORMSPREE
+  const [state, handleSubmit] = useForm("xkgdqqja");
 
-  function sendEmail(e) {
+  async function sendEmail(e) {
     e.preventDefault();
 
-    const formEl = form.current;
+    const form = e.target;
 
-    const nome = formEl.nome.value;
-    const email = formEl.email.value;
-    const whatsapp = formEl.whatsapp.value;
-    const mensagem = formEl.mensagem.value;
+    const dados = {
+      nome: form.nome.value,
+      email: form.email.value,
+      whatsapp: form.whatsapp.value,
+      mensagem: form.mensagem.value,
+    };
 
-    // Texto para WhatsApp
-    const textoWhatsApp =
-      `Olá! Novo contato recebido:\n\n` +
-      `👤 Nome: ${nome}\n` +
-      `📧 Email: ${email}\n` +
-      `📱 WhatsApp: ${whatsapp}\n` +
-      `💬 Mensagem:\n${mensagem}\n\n` +
-      `Enviado via site TopTur Bahia.`;
+    // 👉 Envio WhatsApp
+    const msg = encodeURIComponent(
+      `Novo contato via site:\n\nNome: ${dados.nome}\nEmail: ${dados.email}\nWhatsApp: ${dados.whatsapp}\nMensagem:\n${dados.mensagem}`
+    );
 
-    const numeroDestino = "5575998892484";
+    window.open(`https://wa.me/5575998892484?text=${msg}`, "_blank");
 
-    const urlWhats = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(
-      textoWhatsApp
-    )}`;
+    // 👉 Envio Formspree
+    await handleSubmit(e);
 
-    // 👉 NOVO FORMATO EmailJS
-    emailjs
-      .sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        form.current,
-        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
-      )
-      .then(() => {
-        setModalOpen(true);
-        form.current.reset();
-
-        // Abre WhatsApp automaticamente
-        window.open(urlWhats, "_blank");
-      })
-      .catch((error) => {
-        console.error("Erro EmailJS:", error);
-        alert("Erro ao enviar. Tente novamente.");
-      });
+    if (state.succeeded) {
+      setModalOpen(true);
+      form.reset();
+    }
   }
-
 
   return (
     <>
@@ -258,12 +232,12 @@ export default function Contato() {
 
         <Flex>
           <ContactCard>
-            <img src="/toptur-logo.png" alt="logo-toptur" />
+            <img src="/toptur-logo.png" alt="TopoTur Logo" />
             <h2>Informações de Contato</h2>
 
             <p>📍 Morro de São Paulo – Bahia</p>
             <p>
-              📞 WhatsApp:
+              📞 WhatsApp:{" "}
               <a href="https://wa.me/5575998892484" target="_blank">
                 (75) 99889-2484
               </a>
@@ -277,14 +251,21 @@ export default function Contato() {
             </p>
           </ContactCard>
 
-            <Form ref={form} onSubmit={sendEmail}>
-        <Input type="text" name="nome" placeholder="Seu nome" required />
-        <Input type="email" name="email" placeholder="Seu email" required />
-        <Input type="text" name="whatsapp" placeholder="WhatsApp" />
-        <TextArea name="mensagem" placeholder="Mensagem" required />
+          <Form onSubmit={sendEmail}>
+            <Input type="text" name="nome" placeholder="Seu nome" required />
 
-        <Button type="submit">Enviar Mensagem</Button>
-      </Form>
+            <Input type="email" name="email" placeholder="Seu email" required />
+            <ValidationError prefix="Email" field="email" errors={state.errors} />
+
+            <Input type="text" name="whatsapp" placeholder="WhatsApp" />
+
+            <TextArea name="mensagem" placeholder="Mensagem" required />
+            <ValidationError prefix="Mensagem" field="mensagem" errors={state.errors} />
+
+            <Button type="submit" disabled={state.submitting}>
+              Enviar Mensagem
+            </Button>
+          </Form>
         </Flex>
 
         <MapBox>
