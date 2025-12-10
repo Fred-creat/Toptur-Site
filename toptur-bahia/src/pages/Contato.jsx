@@ -1,6 +1,7 @@
 import styled, { keyframes } from "styled-components";
-import emailjs from "@emailjs/browser";
-import { useState } from "react";
+import emailjs from "@emailjs/browser"
+import { useState, useRef } from "react";
+
 
 /* ANIMAÇÃO DO MODAL */
 const fadeIn = keyframes`
@@ -183,27 +184,55 @@ export default function Contato() {
 
 
   const [modalOpen, setModalOpen] = useState(false);
-function sendEmail(e) {
-  e.preventDefault();
 
-  const form = e.target;
+  // Referência do formulário
+  const form = useRef();
 
-  emailjs
-    .sendForm(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      form,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
-    .then(() => {
-      setModalOpen(true);
-      form.reset();
-    })
-    .catch((error) => {
-      console.error("ERRO EMAILJS:", error);
-      alert("Erro ao enviar mensagem. Verifique sua configuração.");
-    });
-}
+  function sendEmail(e) {
+    e.preventDefault();
+
+    const formEl = form.current;
+
+    const nome = formEl.nome.value;
+    const email = formEl.email.value;
+    const whatsapp = formEl.whatsapp.value;
+    const mensagem = formEl.mensagem.value;
+
+    // Texto para WhatsApp
+    const textoWhatsApp =
+      `Olá! Novo contato recebido:\n\n` +
+      `👤 Nome: ${nome}\n` +
+      `📧 Email: ${email}\n` +
+      `📱 WhatsApp: ${whatsapp}\n` +
+      `💬 Mensagem:\n${mensagem}\n\n` +
+      `Enviado via site TopTur Bahia.`;
+
+    const numeroDestino = "5575998892484";
+
+    const urlWhats = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(
+      textoWhatsApp
+    )}`;
+
+    // 👉 NOVO FORMATO EmailJS
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        form.current,
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+      )
+      .then(() => {
+        setModalOpen(true);
+        form.current.reset();
+
+        // Abre WhatsApp automaticamente
+        window.open(urlWhats, "_blank");
+      })
+      .catch((error) => {
+        console.error("Erro EmailJS:", error);
+        alert("Erro ao enviar. Tente novamente.");
+      });
+  }
 
 
   return (
@@ -248,14 +277,14 @@ function sendEmail(e) {
             </p>
           </ContactCard>
 
-          <Form onSubmit={sendEmail}>
-            <Input type="text" name="nome" placeholder="Seu nome" required />
-            <Input type="email" name="email" placeholder="Seu email" required />
-            <Input type="text" name="whatsapp" placeholder="WhatsApp" />
-            <TextArea name="mensagem" placeholder="Mensagem" required />
+            <Form ref={form} onSubmit={sendEmail}>
+        <Input type="text" name="nome" placeholder="Seu nome" required />
+        <Input type="email" name="email" placeholder="Seu email" required />
+        <Input type="text" name="whatsapp" placeholder="WhatsApp" />
+        <TextArea name="mensagem" placeholder="Mensagem" required />
 
-            <Button type="submit">Enviar Mensagem</Button>
-          </Form>
+        <Button type="submit">Enviar Mensagem</Button>
+      </Form>
         </Flex>
 
         <MapBox>
