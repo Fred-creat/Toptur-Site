@@ -25,8 +25,8 @@ const WeatherBox = styled.div`
   }
 
   @media (max-width: 600px) {
-    margin-top: -520px;
-    left: 80%;
+    margin-top: -720px;
+    left: 81%;
     transform: translateX(-50%) scale(0.9);
   }
 
