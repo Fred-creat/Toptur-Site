@@ -5,6 +5,14 @@ const Page = styled.div`
   max-width: 1100px;
   margin: auto;
   padding: 40px 20px;
+
+  
+  .raizes {
+    width: 100%;
+    height: 500px;
+
+  }
+
 `;
 
 const BackButton = styled.a`
@@ -41,6 +49,7 @@ const GalleryGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   margin-bottom: 40px;
+
 `;
 
 const GalleryImg = styled.img`
@@ -54,7 +63,10 @@ const GalleryImg = styled.img`
   &:hover {
     transform: scale(1.03);
   }
+
+  
 `;
+ 
 
 export default function Buggy() {
   return (
@@ -64,18 +76,23 @@ export default function Buggy() {
       <Title> Passeio de Buggy</Title>
 
       <Desc>
-        Um passeio incrível pelos principais pontos da Ilha de Tinharé:
-        piscinas naturais, Moreré, Garapuá e muito mais.
+       Explore Morro de São Paulo e seus arredores em um passeio de Buggy que combina adrenalina, liberdade e paisagens deslumbrantes.<br />
+O trajeto percorre trilhas naturais, praias paradisíacas, dunas suaves e mirantes com vista cinematográfica — tudo com a brisa do mar batendo no rosto e a energia vibrante da ilha.<br />
+
+Este passeio é perfeito para quem busca emoção sem abrir mão do visual encantador da costa baiana. O buggy permite acesso a pontos exclusivos, ideais para fotos, banho e contemplação da natureza.<br />
+
+
+<br />
+<br />
+<b>Destaques do passeio:</b><br />
 
        <ul>
-        <li> O passeio é excelente pra quem quer conhcer quase tudo em um só dia: </li>
-        <li>Saída a partir das 9h da manhã</li>
-        <li>Navega por cerca de 25 a 30 minutos até a primeira parada.</li>
-        <li>Primeira parada:Piscinas Naturais de  Garapuá(30 minutos)</li>
-          <li>Segunda parada:Piscinas Naturais de  Moreré(30 minutos)</li>
-            <li>Terceira parada:Almoço em Boipeba(2hrs)</li>
-              <li>Quarta parada: Canavieiras de Tinharé(30 minutos)</li>
-                <li>Quinta e última parada:Cidade histórica de Cairu(30 minutos)</li>
+        <li> Trilhas emocionantes entre mata, areia e orla </li>
+        <li>Paradas em praias paradisíacas e mirantes incríveis</li>
+        <li> Emoção sob medida, com segurança e guia local</li>
+        <li> Experiência perfeita para famílias, casais e grupos </li>
+        <li><b>Buggy TopTur Bahia: aventura com liberdade e paisagens inesquecíveis.</b></li>
+           
        </ul>
       </Desc>
 
@@ -85,7 +102,7 @@ export default function Buggy() {
         <GalleryImg src="/piscinas-garapua.png" alt="Piscinas" />
       </GalleryGrid>
 
-      <VideoPlayer src="/videos/volta-ilha1.mp4" />
+       <GalleryImg className="raizes" src="/raizes.png" alt="Raizes em garapuá" />
     </Page>
   );
 }

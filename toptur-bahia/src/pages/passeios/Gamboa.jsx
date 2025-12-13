@@ -64,25 +64,28 @@ export default function Gamboa() {
       <Title>Gamboa</Title>
 
       <Desc>
-        Uma ilha encantadora, com belezas naturais e muito atrativo para passar o dia:
-        piscinas naturais,almoço na praia de Garapuá e muito mais.
+       O Passeio de Gamboa é uma experiência encantadora que combina beleza natural, águas calmas e um clima relaxante típico da região. A bordo de uma embarcação confortável, o trajeto oferece vistas privilegiadas da costa de Morro de São Paulo até uma das praias mais especiais da ilha.
 
+Em Gamboa, você encontra o famoso banco de argila natural, conhecido por suas propriedades revitalizantes para a pele, além de um mar tranquilo, ideal para banho, fotos e momentos de descanso. O cenário é perfeito para quem busca paz, beleza e um toque de renovação.
+<br />
+<br />
+
+<b>Destaques do passeio:</b>
        <ul>
-        <li> O passeio maravilhoso pra quem quer passar o dia mais tranquilo. </li>
-        <li>Saída a partir das 9h da manhã</li>
-        <li>Navega por cerca de 25 a 30 minutos até a primeira parada.</li>
-        <li>Primeira parada:Piscinas Naturais de  Garapuá(1h30h minutos)</li>
-          <li>Segunda parada:Praia de Garapuá(Aqui ficamos bem mais tempo)</li>
-            <li>Você pode fazer um passeio pela praia</li>
-              <li>Passeio de Kaiaque pelo manguezal de águas cristalinas(não incluso no pacote)</li>
-                <li>Almoço e depois retornamos a Morro de São Paulo</li>
+        <li> Travessia encantadora em escuna com vista panorâmica da ilha </li>
+        <li>Banho de argila natural — um dos pontos mais famosos da região</li>
+        <li>Praia de águas calmas e cristalinas</li>
+        <li>Paradas para banho nas piscinas naturais, fotos e experiências relaxantes</li>
+          <li>Ambiente tranquilo, perfeito para famílias e casais</li>
+            <li>Parada sensacional no banco de areia no meio do mar</li>
+                <li>Almoço na praia linda e depois retornamos a Morro de São Paulo</li>
        </ul>
       </Desc>
 
       <GalleryGrid>
-        <GalleryImg src="/piscinas-garapua.png" alt="Piscinas naturais de Garapuá" />
+        <GalleryImg src="/piscinas-gamboa.png" alt="Piscinas naturais de Garapuá" />
         <GalleryImg src="/toptur-logo.png" alt="Logo TopTur" />
-        <GalleryImg src="/praia-de-garapua.png" alt="Praia de Garapuá" />
+        <GalleryImg src="/banco-de-areia_gamboa.png" alt="Praia de Garapuá" />
       </GalleryGrid>
 
       <VideoPlayer src="/videos/volta-ilha1.mp4" />

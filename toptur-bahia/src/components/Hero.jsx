@@ -3,7 +3,7 @@ import styled from "styled-components";
 const HeroSection = styled.section`
   width: 100%;
   height: 75vh;
-  background: url("/banner.jpg") center center / cover no-repeat;
+  background: url("/volta-ilha.png") center center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

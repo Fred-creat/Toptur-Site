@@ -90,7 +90,7 @@ export default function Passeios() {
       desc: "Aventura pelas trilhas e praias com emoção total."
     },
     {
-      nome: "4x4",
+      nome: "Quadriciclo",
       slug: "4x4",
       img: "quadri.png",
       desc: "Passeio radical pelas rotas da ilha."

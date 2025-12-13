@@ -64,28 +64,33 @@ export default function Bainema() {
       <Title>Passeio Bainema</Title>
 
       <Desc>
-        Um passeio incrível pelos principais pontos da Ilha de Tinharé:
-        piscinas naturais, Moreré, Garapuá e muito mais.
+        A Praia de Bainema, localizada na encantadora Ilha de Boipeba, é um dos refúgios naturais mais preservados da Bahia. Com quilômetros de areia dourada, mar calmo em tons de azul cristalino e uma extensa área de coqueiros que compõe um cenário paradisíaco, Bainema é o destino perfeito para quem busca tranquilidade, beleza e conexão com a natureza.
 
-       <ul>
-        <li> O passeio é excelente pra quem quer conhcer quase tudo em um só dia: </li>
-        <li>Saída a partir das 9h da manhã</li>
-        <li>Navega por cerca de 25 a 30 minutos até a primeira parada.</li>
-        <li>Primeira parada:Piscinas Naturais de  Garapuá(30 minutos)</li>
-          <li>Segunda parada:Piscinas Naturais de  Moreré(30 minutos)</li>
-            <li>Terceira parada:Almoço em Boipeba(2hrs)</li>
-              <li>Quarta parada: Canavieiras de Tinharé(30 minutos)</li>
-                <li>Quinta e última parada:Cidade histórica de Cairu(30 minutos)</li>
-       </ul>
+        Durante o passeio, os visitantes têm a oportunidade de explorar piscinas naturais de águas mornas, formadas durante a maré baixa, ideais para banho, fotos e descanso total. O ambiente é silencioso, rústico e intocado, proporcionando uma experiência autêntica e exclusiva, distante das áreas mais movimentadas da região.
+
+        Ao longo do percurso, é possível apreciar vistas cinematográficas, observar fauna marinha e capturar imagens impressionantes da paisagem. Bainema é, sem dúvida, um dos lugares mais especiais para quem deseja vivenciar a essência do litoral baiano: paz, beleza e natureza em seu estado mais puro.
+
+       
+        <ul>
+          <li>  Ideal para: famílias, casais, amantes da natureza, quem busca tranquilidade e experiências fotográficas memoráveis.
+ </li>
+          <li>Saída a partir das 8:30h da manhã</li>
+          <li>Navega por cerca de 30 a 40 minutos até a primeira parada.</li>
+          <li>Primeira parada:<b>Piscinas Naturais de Bainema</b>(50 minutos)</li>
+          <li>Segunda parada: <b>Praia de Bainema</b>(30 minutos)</li>
+          <li>Terceira parada:<b>Almoço em praia de Moreré</b>(2hrs)</li>
+          <li>Retorno: Por volta 15:30h da Tarde</li>
+          <li>Chegada por volta das 16:30h</li>
+        </ul>
       </Desc>
 
       <GalleryGrid>
-        <GalleryImg src="/piscinas-morere.png" alt="Piscinas naturais" />
+        <GalleryImg src="/bainema-piscinas.png" alt="Piscinas naturais" />
         <GalleryImg src="/toptur-logo.png" alt="Logo TopTur" />
-        <GalleryImg src="/volta-ilha.png" alt="Piscinas" />
+        <GalleryImg src="/bainema.png" alt="Piscinas" />
       </GalleryGrid>
 
-      <VideoPlayer src="/videos/volta-ilha1.mp4" />
+      <GalleryImg src="/bainema-piscinas.png" alt="Piscinas naturais" />
     </Page>
   );
 }

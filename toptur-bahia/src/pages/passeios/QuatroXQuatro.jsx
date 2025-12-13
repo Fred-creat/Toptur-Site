@@ -61,28 +61,29 @@ export default function QuatroXQuatro() {
     <Page>
       <BackButton href="/passeios">← Voltar aos Passeios</BackButton>
 
-      <Title>Passeio 4X4</Title>
+      <Title>Passeio Quadriciclo</Title>
 
       <Desc>
-        Um passeio incrível pelos principais pontos da Ilha de Tinharé:
-        piscinas naturais, Moreré, Garapuá e muito mais.
+        O passeio de Quadriciclo é uma experiência intensa e divertida, ideal para quem deseja viver a ilha de um jeito único, no seu ritmo.
+        Você assume o controle da máquina e percorre trilhas de terra, ladeiras, caminhos pela mata e trechos costeiros, sempre com acompanhamento de guia experiente.
 
-       <ul>
-        <li> O passeio é excelente pra quem quer conhcer quase tudo em um só dia: </li>
-        <li>Saída a partir das 9h da manhã</li>
-        <li>Navega por cerca de 25 a 30 minutos até a primeira parada.</li>
-        <li>Primeira parada:Piscinas Naturais de  Garapuá(30 minutos)</li>
-          <li>Segunda parada:Piscinas Naturais de  Moreré(30 minutos)</li>
-            <li>Terceira parada:Almoço em Boipeba(2hrs)</li>
-              <li>Quarta parada: Canavieiras de Tinharé(30 minutos)</li>
-                <li>Quinta e última parada:Cidade histórica de Cairu(30 minutos)</li>
-       </ul>
+        Perfeito para amantes de aventura, o quadriciclo entrega uma imersão total na paisagem, despertando sensação de liberdade e conexão com a natureza.
+         <br />
+         <br />
+       <b> Destaques do passeio:</b>
+        <ul>
+          <li> Conduza seu próprio quadriciclo </li>
+          <li>Trilhas naturais, subidas, descidas e desafios leves</li>
+          <li>Cenários incríveis para fotos e paradas estratégicas</li>
+          <li>Sensação de aventura e superação de limites</li>
+
+        </ul>
       </Desc>
 
       <GalleryGrid>
-        <GalleryImg src="/piscinas-morere.png" alt="Piscinas naturais" />
+        <GalleryImg src="/quadri.png" alt="Piscinas naturais" />
         <GalleryImg src="/toptur-logo.png" alt="Logo TopTur" />
-        <GalleryImg src="/volta-ilha.png" alt="Piscinas" />
+        <GalleryImg src="/ciclo.png" alt="Piscinas" />
       </GalleryGrid>
 
       <VideoPlayer src="/videos/volta-ilha1.mp4" />
