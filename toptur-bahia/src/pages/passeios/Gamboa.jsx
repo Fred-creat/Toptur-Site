@@ -5,6 +5,13 @@ const Page = styled.div`
   max-width: 1100px;
   margin: auto;
   padding: 40px 20px;
+
+   
+  .raizes {
+    width: 100%;
+    height: 500px;
+
+  }
 `;
 
 const BackButton = styled.a`
@@ -88,7 +95,7 @@ Em Gamboa, você encontra o famoso banco de argila natural, conhecido por suas p
         <GalleryImg src="/banco-de-areia_gamboa.png" alt="Praia de Garapuá" />
       </GalleryGrid>
 
-      <VideoPlayer src="/videos/volta-ilha1.mp4" />
+      <GalleryImg className="raizes" src="/banco-de-areia_gamboa.png" alt="Praia de Garapuá" />
     </Page>
   );
 }
