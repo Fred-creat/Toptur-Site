@@ -51,90 +51,93 @@ const Icon = styled.div`
 `;
 
 /* ================== BANNER PROMO ================== */
-
 const Overlay = styled.div`
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.7);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 12px;
 `;
 
 const Banner = styled.div`
   background: #fff;
-  max-width: 400px;
   width: 100%;
-  height: 600px;
-  margin-top: 20px;
-  border-radius: 18px;
-  padding: 12px;
-  margin-left: 65%;
+  max-width: 420px;
+  border-radius: 16px;
+  padding: 14px;
   text-align: center;
   position: relative;
-  animation: zoom 0.5s ease;
 
-  @keyframes zoom {
-    from {
-      transform: scale(0.9);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+  /* MOBILE FIRST */
+  @media (max-width: 480px) {
+    max-width: 95%;
+    padding: 12px;
   }
 `;
 
 const BannerImage = styled.img`
   width: 100%;
-  height: 500px;
+  height: auto;
+  max-height: 240px;
   object-fit: cover;
-  position: relative;
-  border-radius: 14px;
-  margin-bottom: 12px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 
+  /* Ajuste fino para celular */
+  @media (max-width: 480px) {
+    max-height: 200px;
+  }
 `;
 
 const BannerTitle = styled.h2`
-  color: #5446a2;
-  font-size: 22px;
-  margin-bottom: 8px;
-  margin-top: -10px;
-  font-weight: bold;
-  text-align: center;
+  color: #e63946;
+  font-size: 20px;
+  margin-bottom: 6px;
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+  }
 `;
 
 const BannerText = styled.p`
-  font-size: 14px;
-  margin-bottom: 14px;
+  font-size: 15px;
+  margin-bottom: 12px;
   color: #333;
+
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 `;
 
 const BannerButton = styled.a`
   display: block;
-  margin-top: -10px;
-  background: #3325d3;
+  background: #25d366;
   color: #fff;
-  padding: 12px;
+  padding: 14px;
   border-radius: 12px;
   font-weight: bold;
   text-decoration: none;
   font-size: 16px;
+
+  @media (max-width: 480px) {
+    font-size: 15px;
+    padding: 12px;
+  }
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 5px;
+  top: 6px;
   right: 10px;
   border: none;
   background: transparent;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  z-index: 10000;
 `;
+
 
 /* ================== COMPONENT ================== */
 
