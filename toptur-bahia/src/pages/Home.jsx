@@ -65,7 +65,7 @@ const Overlay = styled.div`
 
 const Banner = styled.div`
   background: #fff;
-  max-width: 300px;
+  max-width: 400px;
   width: 100%;
   height: 600px;
   margin-top: 20px;
