@@ -79,7 +79,7 @@ const Banner = styled.div`
 `;
 
 const BannerImage = styled.img`
-  width: 100%;
+  width: 42%;
   height: auto;
   max-height: 240px;
   object-fit: cover;
