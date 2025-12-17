@@ -140,51 +140,35 @@ const CloseButton = styled.button`
 
 
 /* ================== COMPONENT ================== */
-
 export default function Home() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowBanner(true);
-    }, 5000);
+    const params = new URLSearchParams(window.location.search);
 
-    return () => clearTimeout(timer);
+    const isGoogleAds =
+      params.get("utm_source") === "google" ||
+      params.get("utm_medium") === "cpc";
+
+    const alreadySeen = localStorage.getItem("toptur_banner_seen");
+
+    if (isGoogleAds && !alreadySeen) {
+      const timer = setTimeout(() => {
+        setShowBanner(true);
+        localStorage.setItem("toptur_banner_seen", "true");
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   return (
     <>
-      <Page>
-        <Hero />
-        <Weather />
+      {/* CONTEÚDO NORMAL */}
+      <Hero />
+      <Weather />
 
-        <Container>
-          <Title>Sobre a TopTur Bahia</Title>
-
-          <Text>
-            A <b>TOPTUR BAHIA</b> surgiu em 2022 com objetivo de oferecer aos seus
-            clientes, de forma honesta e verdadeira o melhor passeio de Morro de
-            São Paulo.
-            <br />
-            Prezamos pela qualidade, transparência, conforto e comodidade.
-            <br />
-            Não temos agência física!!
-          </Text>
-
-          <Icon>
-            <b>Siga-nos no Instagram</b>
-            <a
-              href="https://www.instagram.com/toptur.bahia/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="fi fi-brands-instagram"></i>
-            </a>
-          </Icon>
-        </Container>
-      </Page>
-
-      {/* ===== BANNER PROMOCIONAL ===== */}
+      {/* BANNER PROMOCIONAL */}
       {showBanner && (
         <Overlay>
           <Banner>
@@ -194,11 +178,14 @@ export default function Home() {
 
             <BannerImage src="/banner-toptur.png" alt="Passeios TopTur" />
 
+            <BannerUrgency>
+              🔥 Últimas vagas disponíveis hoje
+            </BannerUrgency>
+
             <BannerTitle>Passeios a partir de R$130,00</BannerTitle>
-            <BannerText>Compre agora e fale direto no WhatsApp</BannerText>
 
             <BannerButton
-              href="https://wa.me/557599843484"
+              href="https://wa.me/5575998892484?text=Olá!%20Vi%20o%20anúncio%20do%20passeio%20de%20lancha%20privativo%20e%20gostaria%20de%20ver%20valores."
               target="_blank"
               rel="noopener noreferrer"
             >
